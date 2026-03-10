@@ -1,155 +1,121 @@
 # NERP AI Foundations
 
-NERP (Naweji Enterprise Reliability Platform) is the applied reliability intelligence framework emerging from my PhD research and Cloud/Platform Engineering practice, designed to transform infrastructure telemetry into evidence-based, autonomous operational actions. In practice, NERP continuously observes system signals, applies machine learning for risk prediction, selects the optimal response policy, and executes automated remediation.
+NERP AI Foundations is a beginner-friendly learning project for understanding the core reliability intelligence loop.
 
-Beginner-friendly starter project for learning the core NERP intelligence loop:
+## Core Loop
 
-**Telemetry -> AI Model -> Decision -> Automation**
+Telemetry -> AI Model -> Decision -> Automation
 
-This repository is intentionally small and practical. It demonstrates how infrastructure metrics can be converted into an automated operational action.
+The repository is organized as a small course. It combines reference notes, daily lesson material, notebooks, sample datasets, reusable Python modules, and demo scripts that show how a simple NERP pipeline can be assembled from raw telemetry to remediation.
 
-## Overview
+## Learning Outcomes
 
-Goal for this week:
+By the end of the material in this repository, you should be able to:
 
-1. Understand how a simple ML model learns from telemetry.
-2. Predict risk from new metric values.
-3. Convert predictions into decisions.
-4. Trigger automation from those decisions.
+1. Explain the NERP architecture at a beginner level.
+2. Load and explore operational datasets with Python and pandas.
+3. Train a basic prediction model for failure risk.
+4. Detect unusual system behavior with anomaly detection.
+5. Map model output to deterministic operational decisions.
+6. Execute safe placeholder remediation actions from software.
 
-Example flow:
+## Repository Layout
 
-- CPU spike detected.
-- Model predicts failure risk.
-- Decision engine chooses to scale.
-- Automation runs scaling action.
-
-## Architecture
 
 ```text
-sample_metrics.csv -> nerp_ai_model.py -> nerp_decision_engine.py -> nerp_automation.py
-                                   \______________________________________________/
-                                              orchestrated by nerp_pipeline_demo.py
+nerp-ai-foundations/
+├── docs/                 Reference reading for concepts and architecture
+├── course/               Day-by-day teaching materials
+├── notebooks/            Guided hands-on labs
+├── datasets/             Sample CSV datasets for system, fintech, and incidents
+├── models/               Saved model artifacts and notes
+├── nerp/                 Reusable Python modules for the NERP pipeline
+├── demos/                End-to-end demos built from the shared modules
+└── diagrams/             Architecture and pipeline images
 ```
 
-## Project Structure
+## Core Python Modules
 
-- `nerp_ai_model.py`: trains and runs a basic Random Forest classifier.
-- `nerp_decision_engine.py`: maps model output to an operational decision.
-- `nerp_automation.py`: executes action handlers (safe print placeholders).
-- `nerp_pipeline_demo.py`: full end-to-end orchestration.
-- `sample_metrics.csv`: default training dataset used by scripts.
-- `data/sample_metrics.csv`: dataset copy under `data/` for cleaner structure.
-
-## Requirements
-
-- Python 3.11+
-- Dependencies in `requirements.txt`
-
-Install:
-
-```bash
-source .venv/bin/activate
-pip install -r requirements.txt
-```
+- `nerp/data_pipeline/data_loader.py`: dataset discovery and CSV loading helpers.
+- `nerp/ai_engine/train_model.py`: trains and saves the prediction model.
+- `nerp/ai_engine/predict.py`: loads a trained model and predicts risk.
+- `nerp/ai_engine/anomaly_detector.py`: trains and runs anomaly detection.
+- `nerp/decision_engine/decision_logic.py`: converts model output into actions.
+- `nerp/automation/remediation_actions.py`: executes safe placeholder remediation commands.
 
 ## Quick Start
 
-Run model only:
+Install dependencies:
 
 ```bash
-/Users/emmanuelnaweji/nerp-ai-beginner/.venv/bin/python nerp_ai_model.py
+pip install -r requirements.txt
 ```
 
-Run full pipeline:
+Run the incident predictor demo:
 
 ```bash
-/Users/emmanuelnaweji/nerp-ai-beginner/.venv/bin/python nerp_pipeline_demo.py
+/Users/emmanuelnaweji/.pyenv/versions/3.11.4/bin/python demos/nerp_incident_predictor/demo_script.py
 ```
 
-Expected output:
+Run the fintech risk monitor demo:
 
-```text
-Prediction: [1]
-Telemetry sample: {'cpu': 92, 'memory': 85, 'latency': 100}
-Model prediction: 1
-Decision: Scale infrastructure
-Scaling Kubernetes cluster
-kubectl scale deployment api --replicas=6
+```bash
+/Users/emmanuelnaweji/.pyenv/versions/3.11.4/bin/python demos/fintech_risk_monitor/demo_script.py
 ```
 
-## Script-by-Script Explanation
+Generate model artifacts:
 
-### `nerp_ai_model.py` (Model Layer)
+```bash
+/Users/emmanuelnaweji/.pyenv/versions/3.11.4/bin/python -m nerp.ai_engine.train_model
+/Users/emmanuelnaweji/.pyenv/versions/3.11.4/bin/python -m nerp.ai_engine.anomaly_detector
+```
 
-- Reads telemetry dataset from CSV.
-- Uses features: `cpu`, `memory`, `latency`.
-- Uses label: `failure` (`0` healthy, `1` risk).
-- Trains `RandomForestClassifier`.
-- Predicts risk for new telemetry input.
+## Using the Notebooks
 
-Pitch line:
-"This is the prediction brain. It learns patterns from historical metrics and classifies new telemetry as healthy or risky."
+The notebooks are designed to be completed in order:
 
-### `nerp_decision_engine.py` (Decision Layer)
+1. `notebooks/01_python_basics.ipynb`
+2. `notebooks/02_data_exploration.ipynb`
+3. `notebooks/03_first_ml_model.ipynb`
+4. `notebooks/04_anomaly_detection.ipynb`
+5. `notebooks/05_prediction_demo.ipynb`
 
-- Accepts model prediction.
-- Returns action text:
-  - `1` -> `Scale infrastructure`
-  - `0` -> `System healthy`
+To use them in VS Code:
 
-Pitch line:
-"This translates AI output into a deterministic operational decision."
+1. Install the dependencies from `requirements.txt`.
+2. Open the repository root in VS Code.
+3. Open a notebook from the `notebooks/` folder.
+4. Select a Python kernel that has the project dependencies installed.
+5. Run the cells from top to bottom.
 
-### `nerp_automation.py` (Automation Layer)
+The early notebooks focus on Python and data exploration. The later notebooks move into model training, anomaly detection, and the full prediction flow.
 
-- Implements action handlers.
-- Current implementation prints safe placeholder commands.
-- Easy place to plug in real orchestration (`kubectl`, cloud SDKs, APIs).
+If a notebook imports project modules such as `nerp.ai_engine`, make sure the notebook is being run with the repository opened as the workspace root so the local package can be resolved correctly.
 
-Pitch line:
-"This is the actuator that executes infrastructure response."
+## Day-by-Day Path
 
-### `nerp_pipeline_demo.py` (Orchestration Layer)
+Day 1 starts with environment setup so you can install dependencies, understand the repository layout, and see how the folders connect.
 
-- Trains model.
-- Defines telemetry sample.
-- Generates prediction.
-- Gets decision.
-- Executes matching automation path.
+Day 2 introduces the AI foundation terms you need for the rest of the week, including features, labels, training, and prediction.
 
-Pitch line:
-"This script demonstrates the complete intelligence loop end-to-end."
+Day 3 moves into data and features, where you inspect the datasets and decide what information should feed the models.
 
-## 60-Second Demo Narrative
+Day 4 uses that data understanding to train the first machine learning model and generate predictions from telemetry.
 
-"I built a starter NERP intelligence pipeline. The model learns from CPU, memory, and latency metrics to predict failure risk. A decision engine maps predictions to clear actions. An automation layer executes those actions. The pipeline script wires the complete flow from telemetry to infrastructure response."
+Day 5 extends the AI layer with anomaly detection so you can compare direct prediction with unusual-pattern detection.
 
-## 7-Day Learning Plan (1-2 Hours/Day)
+Day 6 turns those AI signals into deterministic operational decisions through the decision engine.
 
-1. Day 1: Environment setup, dependencies, and dataset basics.
-2. Day 2: Run and inspect `nerp_ai_model.py`.
-3. Day 3: Learn anomaly detection basics (Isolation Forest).
-4. Day 4: Extend rules in `nerp_decision_engine.py`.
-5. Day 5: Add safe/real modes in `nerp_automation.py`.
-6. Day 6: Test multiple telemetry scenarios.
-7. Day 7: Present full pipeline demo with explanation.
+Day 7 completes the loop by executing safe automation actions and presenting the full NERP flow from telemetry to remediation.
 
-## Next Professional Upgrades
-
-1. Load telemetry from API input instead of hard-coded values.
-2. Add model evaluation metrics (`accuracy`, `precision`, `recall`).
-3. Add unit tests for decision and automation modules.
-4. Add FastAPI endpoint for prediction and action simulation.
-5. Add logging and alerting for production-style observability.
+To move through the material smoothly, read the matching note in `docs/`, complete the lesson in `course/`, work through the related notebook, then inspect the corresponding Python module in `nerp/`.
 
 ## Notes
 
-- Keep this phase simple. Do not jump into advanced models yet.
-- Mastering basic ML pipeline design is the best foundation for NERP.
+- The automation layer uses safe print-based placeholders instead of real infrastructure changes.
+- The sample model files under `models/` are beginner-friendly artifacts that can be regenerated from the training modules.
+- The diagrams are placeholder visuals for teaching structure and can be replaced with richer assets later.
 
----
-***Keep learning ... Keep building.***
-**By Emmanuel Naweji, 2026**
+## Author
 
-
+Emmanuel Naweji, 2026

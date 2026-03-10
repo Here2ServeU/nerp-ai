@@ -1,0 +1,7 @@
+incident_id,service,severity,response_minutes,repeat_incident,resolved
+INC-201,api-gateway,high,42,1,1
+INC-202,payments,critical,65,1,0
+INC-203,auth-service,medium,18,0,1
+INC-204,worker-queue,low,12,0,1
+INC-205,data-sync,high,51,1,0
+INC-206,reporting,medium,26,0,1
