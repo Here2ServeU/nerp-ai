@@ -1,0 +1,8 @@
+cpu_usage,memory_usage,system_status
+45,60,normal
+50,65,normal
+90,80,warning
+95,85,failure
+70,70,normal
+85,75,warning
+98,90,failure
