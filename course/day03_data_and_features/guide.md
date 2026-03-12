@@ -157,6 +157,104 @@ deactivate
 
 ---
 
+# Script Walkthrough — `load_dataset.py`
+
+```python
+import pandas as pd
+```
+
+`import pandas as pd` — loads the pandas library under the alias `pd`. Every pandas operation in this script uses the `pd.` prefix.
+
+---
+
+```python
+DATA_PATH = "../../datasets/system_metrics_sample.csv"
+```
+
+`DATA_PATH` — stores the relative file path to the dataset as a constant. Two `../` steps navigate up from the current day folder to the project root, then into `datasets/`. Using a named constant makes the path easy to update in one place.
+
+---
+
+```python
+data = pd.read_csv(DATA_PATH)
+```
+
+`pd.read_csv(DATA_PATH)` — reads the CSV file at `DATA_PATH` and returns a pandas DataFrame. Each row in the file becomes a row in the DataFrame and each column header becomes a column name.
+
+---
+
+```python
+print("Dataset Preview:")
+print(data)
+```
+
+`print("Dataset Preview:")` — prints a descriptive label before the table output.
+
+`print(data)` — prints the entire DataFrame, showing all rows and columns.
+
+---
+
+```python
+print(f"Rows   : {data.shape[0]}")
+print(f"Columns: {data.shape[1]}")
+```
+
+`data.shape` — returns a tuple `(rows, columns)` describing the size of the DataFrame.
+
+`data.shape[0]` — the number of rows (observations).
+
+`data.shape[1]` — the number of columns (features + label).
+
+The `f"...{...}"` syntax is an f-string, which embeds a variable's value directly inside a string.
+
+---
+
+```python
+FEATURE_COLUMNS = ["cpu", "memory", "latency"]
+TARGET_COLUMN = "failure"
+```
+
+`FEATURE_COLUMNS` — a list of the column names that will be used as inputs to the model. These are the measurable properties that describe each system snapshot.
+
+`TARGET_COLUMN` — the column the model will learn to predict. A value of `1` means failure risk and `0` means healthy.
+
+Naming these as constants at the top makes the script easier to read and modify.
+
+---
+
+```python
+print(f"Features : {FEATURE_COLUMNS}")
+print(f"Label    : {TARGET_COLUMN}")
+```
+
+Prints the feature list and label name to the terminal so you can confirm the column selection at a glance.
+
+---
+
+```python
+print("Feature Statistics:")
+print(data[FEATURE_COLUMNS].describe())
+```
+
+`data[FEATURE_COLUMNS]` — selects only the feature columns from the DataFrame, excluding the label.
+
+`.describe()` — computes summary statistics for each column: count, mean, standard deviation, minimum, maximum, and quartile values. This gives a quick overview of the data distribution.
+
+---
+
+```python
+print("Label Distribution:")
+print(data[TARGET_COLUMN].value_counts().rename({0: "healthy (0)", 1: "failure (1)"}))
+```
+
+`data[TARGET_COLUMN]` — selects only the label column.
+
+`.value_counts()` — counts how many times each unique value appears. This tells you how many healthy versus failure examples are in the dataset.
+
+`.rename({0: "healthy (0)", 1: "failure (1)"})` — replaces the numeric labels `0` and `1` with readable names in the output.
+
+---
+
 # Assignment
 
 Complete the following:

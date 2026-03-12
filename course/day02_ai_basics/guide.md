@@ -185,6 +185,53 @@ deactivate
 
 ---
 
+# Script Walkthrough — `dataset_intro.py`
+
+```python
+import pandas as pd
+```
+
+`import pandas as pd` — loads the pandas library and gives it the short alias `pd`. Pandas is the standard Python library for working with structured data like spreadsheets and CSV files.
+
+---
+
+```python
+data = {
+    "cpu_usage": [45, 50, 90, 95],
+    "memory_usage": [60, 65, 80, 85],
+    "system_status": ["normal", "normal", "warning", "failure"]
+}
+```
+
+`data = { ... }` — creates a Python dictionary where each key is a column name and each value is a list of readings.
+
+| Key | Meaning |
+|-----|---------|
+| `"cpu_usage"` | CPU percentage readings from four system snapshots |
+| `"memory_usage"` | Memory percentage readings from the same four snapshots |
+| `"system_status"` | The health label for each snapshot — what we want the model to learn to predict |
+
+---
+
+```python
+df = pd.DataFrame(data)
+```
+
+`pd.DataFrame(data)` — converts the dictionary into a pandas DataFrame. A DataFrame is a table with named columns and numbered rows. The variable `df` is the standard short name for a DataFrame.
+
+---
+
+```python
+print("Dataset Preview:")
+print(df)
+```
+
+`print("Dataset Preview:")` — prints a label to the terminal so you know what the next output represents.
+
+`print(df)` — prints the full DataFrame table to the terminal, showing all rows and columns.
+
+---
+
 # Assignment
 
 1. Activate your virtual environment
