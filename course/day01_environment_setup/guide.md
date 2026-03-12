@@ -135,6 +135,18 @@ python ai_intro.py
 ```
 If the message appears, your AI environment is ready.
 
+---
+
+## Script Walkthrough — `ai_intro.py`
+
+```python
+print("NERP AI environment ready")
+```
+
+| Line | Explanation |
+|------|-------------|
+| `print("NERP AI environment ready")` | Calls Python's built-in `print` function, which writes the text inside the quotes to the terminal. This single line confirms that Python is installed, the virtual environment is active, and the script runs correctly. It is intentionally minimal — the only goal on Day 1 is to verify the environment. |
+
 ------------------------------------------------------------------------
 
 ## Step 7 --- Deactivate the Virtual Environment

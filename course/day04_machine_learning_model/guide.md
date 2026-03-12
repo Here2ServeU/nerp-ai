@@ -241,6 +241,101 @@ datasets/system_metrics.csv
 
 ---
 
+# Script Walkthrough — `train_model.py`
+
+```python
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+```
+
+`import pandas as pd` — loads pandas for reading and handling the dataset.
+
+`from sklearn.tree import DecisionTreeClassifier` — imports the Decision Tree model from scikit-learn. A Decision Tree learns rules by splitting data based on feature thresholds, similar to a flowchart of yes/no questions.
+
+---
+
+```python
+DATA_PATH = "../../datasets/system_metrics_sample.csv"
+data = pd.read_csv(DATA_PATH)
+```
+
+`DATA_PATH` — the relative path to the dataset file.
+
+`pd.read_csv(DATA_PATH)` — reads the CSV file into a pandas DataFrame. Each row is a system snapshot. Each column is a feature or the label.
+
+---
+
+```python
+print("Dataset Preview:")
+print(data)
+```
+
+Prints the full dataset so you can verify it loaded correctly before training.
+
+---
+
+```python
+FEATURE_COLUMNS = ["cpu", "memory", "latency"]
+TARGET_COLUMN = "failure"
+
+X = data[FEATURE_COLUMNS]
+y = data[TARGET_COLUMN]
+```
+
+`FEATURE_COLUMNS` — the three columns the model will use as inputs.
+
+`TARGET_COLUMN` — the column the model will learn to predict.
+
+`X` — the feature matrix. By convention, `X` is uppercase because it is a 2D table (matrix).
+
+`y` — the label vector. By convention, `y` is lowercase because it is a 1D list (vector).
+
+---
+
+```python
+model = DecisionTreeClassifier(random_state=42)
+model.fit(X, y)
+```
+
+`DecisionTreeClassifier(random_state=42)` — creates a new, untrained Decision Tree model. `random_state=42` fixes the random seed so results are reproducible every time you run the script.
+
+`model.fit(X, y)` — trains the model. It reads every row in `X` alongside the matching label in `y` and learns which feature combinations predict each outcome.
+
+---
+
+```python
+print("Model trained successfully.\n")
+```
+
+Prints a confirmation message after training completes.
+
+---
+
+```python
+sample = pd.DataFrame([{"cpu": 92, "memory": 85, "latency": 110}])
+prediction = model.predict(sample[FEATURE_COLUMNS])
+```
+
+`pd.DataFrame([{...}])` — creates a single-row DataFrame representing a new telemetry reading. Wrapping it in a list and DataFrame ensures it matches the format expected by `model.predict`.
+
+`model.predict(sample[FEATURE_COLUMNS])` — asks the trained model to classify the new sample. It returns an array of predicted labels.
+
+---
+
+```python
+label = "failure risk" if prediction[0] == 1 else "healthy"
+print(f"Sample  : cpu=92, memory=85, latency=110")
+print(f"Prediction: {prediction[0]} ({label})")
+```
+
+`prediction[0]` — takes the first (and only) prediction from the returned array.
+
+The `if/else` expression maps the numeric output back to a human-readable string.
+
+`print(...)` — displays the input sample and prediction together so the result is easy to read.
+
+---
+
 # Cleanup (Optional)
 
 Deactivate the virtual environment.
