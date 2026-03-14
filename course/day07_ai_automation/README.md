@@ -79,7 +79,7 @@ nerp-ai/
 ├── evaluate_model.py       (Day 5)
 ├── decision_engine.py      (Day 6)
 ├── automation_demo.py      (Day 7 — new)
-└── guide.md
+└── README.md
 ```
 
 ---
@@ -335,3 +335,13 @@ Over seven days you:
 You have built a complete, working AI pipeline from telemetry to automation.
 
 **Author: Emmanuel Naweji, 2026**
+
+---
+
+## Install dependencies for a specific course day
+
+```bash
+cd course/day07_ai_automation
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```

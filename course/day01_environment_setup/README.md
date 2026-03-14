@@ -179,3 +179,13 @@ In Day 2 we will explore:
 
 What is Artificial Intelligence really?\
 How do machines learn from data?
+
+------------------------------------------------------------------------
+
+## Install dependencies for a specific course day
+
+```bash
+cd course/day01_environment_setup
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```

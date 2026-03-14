@@ -76,7 +76,7 @@ nerp-ai/
 ├── train_model.py          (Day 4)
 ├── evaluate_model.py       (Day 5)
 ├── decision_engine.py      (Day 6 — new)
-└── guide.md
+└── README.md
 ```
 
 ---
@@ -302,3 +302,13 @@ In the final lesson you will learn:
 - How to present the complete pipeline in a demo
 
 See you in **Day 7**.
+
+---
+
+## Install dependencies for a specific course day
+
+```bash
+cd course/day06_ai_decision_engine
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```

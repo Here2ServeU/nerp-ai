@@ -23,7 +23,7 @@ By the end of the material in this repository, you should be able to:
 
 
 ```text
-nerp-ai-foundations/
+nerp-ai/
 ├── docs/                 Reference reading for concepts and architecture
 ├── course/               Day-by-day teaching materials
 ├── notebooks/            Guided hands-on labs
@@ -48,26 +48,35 @@ nerp-ai-foundations/
 Install dependencies:
 
 ```bash
-pip install -r requirements.txt
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 ```
 
 Run the incident predictor demo:
 
 ```bash
-/Users/emmanuelnaweji/.pyenv/versions/3.11.4/bin/python demos/nerp_incident_predictor/demo_script.py
+python demos/nerp_incident_predictor/demo_script.py
 ```
 
 Run the fintech risk monitor demo:
 
 ```bash
-/Users/emmanuelnaweji/.pyenv/versions/3.11.4/bin/python demos/fintech_risk_monitor/demo_script.py
+python demos/fintech_risk_monitor/demo_script.py
 ```
 
 Generate model artifacts:
 
 ```bash
-/Users/emmanuelnaweji/.pyenv/versions/3.11.4/bin/python -m nerp.ai_engine.train_model
-/Users/emmanuelnaweji/.pyenv/versions/3.11.4/bin/python -m nerp.ai_engine.anomaly_detector
+python -m nerp.ai_engine.train_model
+python -m nerp.ai_engine.anomaly_detector
+```
+
+Install dependencies for a specific course day:
+
+```bash
+cd course/day07_ai_automation
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 ```
 
 ## Using the Notebooks
@@ -102,7 +111,7 @@ Day 3 moves into data and features, where you inspect the datasets and decide wh
 
 Day 4 uses that data understanding to train the first machine learning model and generate predictions from telemetry.
 
-Day 5 extends the AI layer with anomaly detection so you can compare direct prediction with unusual-pattern detection.
+Day 5 focuses on model evaluation so you can measure prediction quality with accuracy, classification metrics, and cross-validation.
 
 Day 6 turns those AI signals into deterministic operational decisions through the decision engine.
 

@@ -273,3 +273,13 @@ Your dataset will then be ready for machine learning.
 In **Day 4**, we will build our **first machine learning model**.
 
 This is where **data becomes intelligence**.
+
+---
+
+## Install dependencies for a specific course day
+
+```bash
+cd course/day03_data_and_features
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```

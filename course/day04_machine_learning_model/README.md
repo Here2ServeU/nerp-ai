@@ -47,7 +47,7 @@ nerp-ai/
 ├── datasets/
 │   └── system_metrics.csv
 ├── train_model.py
-└── guide.md
+└── README.md
 ```
 
 ---
@@ -357,5 +357,15 @@ In the next lesson you will learn:
 - how to improve predictions
 
 NERP AI Fundamentals continues on Day 5. See you then!
+
+---
+
+## Install dependencies for a specific course day
+
+```bash
+cd course/day04_machine_learning_model
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
 
 

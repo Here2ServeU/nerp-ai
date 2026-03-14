@@ -106,7 +106,7 @@ nerp-ai/
 │   └── system_metrics.csv
 ├── train_model.py        (Day 4)
 ├── evaluate_model.py     (Day 5 — new)
-└── guide.md
+└── README.md
 ```
 
 ---
@@ -334,3 +334,13 @@ In the next lesson you will learn:
 - How NERP maps AI signals to actions
 
 See you in **Day 6**.
+
+---
+
+## Install dependencies for a specific course day
+
+```bash
+cd course/day05_model_evaluation
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
